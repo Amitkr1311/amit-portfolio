@@ -2,7 +2,7 @@
 
 Personal portfolio website of **Amit Kumar**, a full-stack software engineer and B.Tech CSE student at IIIT Raichur. Built to showcase projects, skills, and professional experience with a focus on real-time systems and AI-powered products.
 
-**Live Site:** [Your Deployed Link Here] *(e.g. amitkr.dev or vercel app link)*
+**Live Site:** [https://profile.iamamit.me/]
 
 ---
 
@@ -16,7 +16,6 @@ Personal portfolio website of **Amit Kumar**, a full-stack software engineer and
 ## ✨ Key Features
 
 - **Custom Animations:** Unique "paper airplane" landing animation and scroll-triggered reveals using Framer Motion.
-- **Dynamic Projects Showcase:** Detailed technical breakdowns of key projects like CollabBoard, PodcastX, and NoteSphere.
 - **Responsive Design:** Fully fluid and responsive layout with a cohesive earthy/dark brand palette (`#F7AD55` and `#885200`).
 - **Environment-Driven:** Easily updatable social links and contact methods configurable via `.env.local`.
 
@@ -36,12 +35,12 @@ Personal portfolio website of **Amit Kumar**, a full-stack software engineer and
 3. **Environment Setup:**
    Create a `.env.local` file in the root directory and add your details:
    ```env
-   NEXT_PUBLIC_EMAIL=1311amitkr@gmail.com
-   NEXT_PUBLIC_PHONE=+919060053989
-   NEXT_PUBLIC_GITHUB_URL=https://github.com/Amitkr1311
-   NEXT_PUBLIC_LINKEDIN_URL=https://www.linkedin.com/in/amit-kumar-iiitr
-   NEXT_PUBLIC_LEETCODE_URL=https://leetcode.com/u/amitkr_1311/
-   NEXT_PUBLIC_RESUME_URL=https://drive.google.com/file/d/...
+   NEXT_PUBLIC_EMAIL=example@gmail.com
+   NEXT_PUBLIC_PHONE=+91 xxxxx xxxxx
+   NEXT_PUBLIC_GITHUB_URL=https://github.com/username
+   NEXT_PUBLIC_LINKEDIN_URL=https://www.linkedin.com/in/username
+   NEXT_PUBLIC_LEETCODE_URL=https://leetcode.com/u/username
+   NEXT_PUBLIC_RESUME_URL=Your Resume Drive Link
    ```
 
 4. **Start the development server:**
@@ -55,5 +54,3 @@ Personal portfolio website of **Amit Kumar**, a full-stack software engineer and
 
 - **Email:** 1311amitkr@gmail.com
 - **LinkedIn:** [amit-kumar-iiitr](https://www.linkedin.com/in/amit-kumar-iiitr)
-- **GitHub:** [@Amitkr1311](https://github.com/Amitkr1311)
-- **LeetCode:** [amitkr_1311](https://leetcode.com/u/amitkr_1311/)
