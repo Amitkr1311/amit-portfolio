@@ -2,7 +2,7 @@
 
 Personal portfolio website of **Amit Kumar**, a full-stack software engineer and B.Tech CSE student at IIIT Raichur. Built to showcase projects, skills, and professional experience with a focus on real-time systems and AI-powered products.
 
-**Live Site:** [https://profile.iamamit.me/]
+**Live Site:** [https://portfolio.iamamit.me/]
 
 ---
 
