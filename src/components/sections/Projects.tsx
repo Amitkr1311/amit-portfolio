@@ -1,11 +1,26 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import type { MotionValue } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
 
 const projects = [
+  {
+    title: "RiskPulse AI",
+    category: "Featured · Financial Risk Intelligence",
+    stack: ["Python", "FastAPI", "Next.js", "TypeScript", "PostgreSQL", "FinBERT", "Recharts"],
+    description:
+      "Portfolio-level risk intelligence platform that analyzes unstructured financial news and historical social-media data to surface actionable risk signals.",
+    highlights: [
+      "FinBERT sentiment analysis, event classification, entity matching, and 1–10 impact scoring",
+      "Mapped 18 event types to 5 scenarios for automated stress testing across 5 asset classes",
+      "Auditable reports link triggering articles to positions, portfolio loss estimates, and the top 5 loss-making exposures",
+    ],
+    image: "/assets/logo.png",
+    githubUrl: "https://github.com/Amitkr1311/iiitr-amit-kumar-hackathon",
+    liveUrl: "#",
+  },
   {
     title: "CollabBoard",
     category: "Real-Time Collaboration",
@@ -53,16 +68,15 @@ const projects = [
   },
 ];
 
-const CARD_SCROLL_VH = 200;
+const CARD_SCROLL_VH = 260;
 
 function getCardScrollTiming(index: number, total: number) {
   const step = 1 / total;
   const segmentStart = index * step;
-  const segmentEnd = (index + 1) * step;
   const revealStart = index === 0 ? 0.001 : segmentStart;
-  const revealEnd = index === 0 ? step * 0.12 : segmentStart + step * 0.32;
-  const exitStart = segmentStart + step * 0.52;
-  const exitEnd = segmentEnd;
+  const revealEnd = index === 0 ? step * 0.16 : segmentStart + step * 0.38;
+  const exitStart = segmentStart + step * 0.62;
+  const exitEnd = segmentStart + step * 0.96;
 
   return { revealStart, revealEnd, exitStart, exitEnd };
 }
@@ -90,7 +104,7 @@ export function Projects() {
             Projects
           </h2>
           <p className="mt-4 text-on-surface-variant max-w-2xl leading-relaxed">
-            Cards begin as a stacked deck and unwrap downward as you scroll.
+            A selection of my work, showcasing my expertise in full-stack development, real-time applications, and AI-powered products. Each project highlights my ability to design and implement scalable solutions that address complex challenges.
           </p>
         </motion.div>
 
@@ -119,9 +133,9 @@ export function Projects() {
             <motion.article
               key={project.title}
               initial={{ opacity: 0, y: 48 }}
-              whileInView={{ opacity: 1, y: 48 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.15, delay: index * 0.03 }}
+              transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
               className="group bg-surface-container-low rounded-2xl border border-outline-variant/25 overflow-hidden shadow-[0_24px_45px_-28px_rgba(136,82,0,0.45)] hover:border-primary/35 transition-colors"
             >
               <div className="relative aspect-video overflow-hidden">
@@ -166,22 +180,26 @@ export function Projects() {
                 </ul>
 
                 <div className="flex items-center gap-3">
-                  <a
-                    href={project.liveUrl || "#"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 py-2.5 rounded-full bg-primary text-on-primary text-sm font-bold tracking-tight hover:bg-primary-container transition-colors"
-                  >
-                    View Project
-                  </a>
-                  <a
-                    href={project.githubUrl || "#"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 py-2.5 rounded-full border border-outline-variant/40 text-sm font-semibold text-on-surface hover:border-primary/40 hover:text-primary transition-colors"
-                  >
-                    Source Code
-                  </a>
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2.5 rounded-full bg-primary text-on-primary text-sm font-bold tracking-tight hover:bg-primary-container transition-colors"
+                    >
+                      View Project
+                    </a>
+                  )}
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2.5 rounded-full border border-outline-variant/40 text-sm font-semibold text-on-surface hover:border-primary/40 hover:text-primary transition-colors"
+                    >
+                      Source Code
+                    </a>
+                  )}
                 </div>
               </div>
             </motion.article>
@@ -266,12 +284,17 @@ function StackedProjectCard({
     [0, exitStart, exitEnd, 1],
     isLastCard ? [1, 1, 1, 1] : [1, 1, 0, 0]
   );
+  const smoothY = useSpring(y, { stiffness: 120, damping: 26, mass: 0.35 });
+  const smoothX = useSpring(x, { stiffness: 120, damping: 26, mass: 0.35 });
+  const smoothRotate = useSpring(rotate, { stiffness: 120, damping: 26, mass: 0.35 });
+  const smoothScale = useSpring(scale, { stiffness: 120, damping: 26, mass: 0.35 });
+  const smoothOpacity = useSpring(opacity, { stiffness: 120, damping: 26, mass: 0.35 });
 
   return (
     <motion.article
-      style={{ y, x, rotate, scale, opacity, zIndex: total - index }}
+      style={{ y: smoothY, x: smoothX, rotate: smoothRotate, scale: smoothScale, opacity: smoothOpacity, zIndex: total - index }}
       // FIXED: Added top-0 so absolute positioning anchors consistently
-      className="absolute top-0 inset-x-0 mx-auto w-[min(900px,92%)] bg-surface-container-low rounded-2xl border border-outline-variant/25 overflow-hidden shadow-[0_30px_50px_-30px_rgba(136,82,0,0.55)]"
+      className="absolute top-0 inset-x-0 mx-auto w-[min(900px,92%)] bg-surface-container-low rounded-2xl border border-outline-variant/25 overflow-hidden shadow-[0_30px_50px_-30px_rgba(136,82,0,0.55)] will-change-transform"
     >
       {/* FIXED: Changed invalid min-h-105 to min-h-[450px] and enforced grid cols on desktop */}
       <div className="grid grid-cols-1 md:grid-cols-12 min-h-[450px]">
@@ -315,22 +338,26 @@ function StackedProjectCard({
           </ul>
 
           <div className="flex items-center gap-3">
-            <a
-              href={project.liveUrl || "#"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2.5 rounded-full bg-primary text-on-primary text-sm font-bold tracking-tight hover:bg-primary-container transition-colors"
-            >
-              View Project
-            </a>
-            <a
-              href={project.githubUrl || "#"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2.5 rounded-full border border-outline-variant/40 text-sm font-semibold text-on-surface hover:border-primary/40 hover:text-primary transition-colors"
-            >
-              Source Code
-            </a>
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2.5 rounded-full bg-primary text-on-primary text-sm font-bold tracking-tight hover:bg-primary-container transition-colors"
+              >
+                View Project
+              </a>
+            )}
+            {project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2.5 rounded-full border border-outline-variant/40 text-sm font-semibold text-on-surface hover:border-primary/40 hover:text-primary transition-colors"
+              >
+                Source Code
+              </a>
+            )}
           </div>
         </div>
       </div>

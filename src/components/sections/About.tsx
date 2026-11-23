@@ -6,14 +6,16 @@ import Image from "next/image";
 const experiences = [
   {
     role: "Web Developer Intern",
-    company: "Seequenze Pvt. Ltd. • Remote",
+    company: "Seequenze Pvt. Ltd.",
     period: "Jan 2026 — May 2026",
     description:
-      "As a Web Developer Intern, I optimized the company infrastructure by migrating backend workloads from EC2 to AWS Lambda, reducing costs by 45% and supporting 2,000+ daily asynchronous executions.",
+      "Built and scaled backend systems and serverless delivery infrastructure for Figma-to-code generation, turning design inputs into deployable React, HTML, and Flutter previews.",
     highlights: [
-      "Engineered an automated Lambda workflow that stores AI-generated code in S3 and builds it on Lambda for live iframe previews.",
-      "Reduced deployment time to under two minutes for generated previews.",
-      "Modified the AI coding agent editFilesTool to use an efficient search-and-replace patch pattern for reliable file operations.",
+      "Developed and debugged Sequelize-backed APIs with AWS SQS-triggered processing and an S3 asset pipeline that processed 100+ design assets in under 5 seconds.",
+      "Built a serverless AWS Lambda and S3 build pipeline for React, HTML, and Flutter projects that reduced preview deployment time to under 2 minutes, streamed build logs, and auto-published live previews.",
+      "Engineered type-safe AI SDK and Zod function-calling tools with a search-and-replace patch pattern, reducing token consumption by 80% and adding resilient handling for incomplete streaming responses.",
+      "Migrated backend workloads from EC2 to AWS Lambda, reducing infrastructure costs by 45% while supporting 2,000+ daily asynchronous executions.",
+      "Automated one-click Netlify deployments with a secure 24-hour ownership-claim workflow, enabling users to publish and claim generated sites.",
     ],
   },
 ];
@@ -43,10 +45,10 @@ const skills = [
 ];
 
 const achievements = [
-  "HackWithInfy 2026: Received a direct pre-placement offer for the Digital Specialist Engineer role at Infosys.",
-  "Contributed to open-source initiatives including eCWOC and SWOC, collaborating with wider developer communities and strengthening practical experience in code quality, version control workflows, and team-driven development.",
-  "Earned a merit certificate in the PRMO Mathematics Olympiad, demonstrating strong analytical reasoning, structured problem-solving ability, and consistency in competitive mathematics.",
-  "Ranked among the top 1.4% globally on LeetCode with 450+ solved problems.",
+  "S&P Global & CRISIL Code to Connect Hackathon 2026: Top 5 finalist for developing RiskPulse AI, an NLP-powered financial risk intelligence and portfolio stress-testing platform.",
+  "HackWithInfy 2026: Secured an Infosys PPO after clearing two DSA rounds and an on-site technical interview.",
+  "Adobe India Hackathon 2026: Advanced to Round 3 as part of a three-member team.",
+  "Ranked in the top 1.3% globally on LeetCode, solving over 500 problems and achieving a contest rating of over 1,650.",
 ];
 
 export function About() {
@@ -87,10 +89,10 @@ export function About() {
             </h2>
             <div className="max-w-xl space-y-6 text-on-surface-variant">
               <p className="text-xl leading-relaxed">
-                I am Amit Kumar, a Computer Science and Engineering undergraduate at IIIT Raichur (2023-2027), focused on full-stack engineering and distributed systems.
+                I am Amit Kumar, a Computer Science and Engineering undergraduate at IIIT Raichur (2023-2027), focused on full-stack engineering, distributed systems, and AI-powered products.
               </p>
               <p className="text-lg opacity-80 leading-relaxed">
-                My work spans serverless AWS infrastructure, real-time collaborative systems, and AI-powered platforms with production-minded reliability.
+                I was named a Top 5 finalist at the S&P Global & CRISIL Code to Connect Hackathon 2026 for building RiskPulse AI, a financial risk intelligence platform that connects news signals to portfolio stress tests. My work spans serverless AWS infrastructure, real-time collaborative systems, and production-minded AI platforms.
               </p>
             </div>
           </motion.div>
@@ -99,7 +101,7 @@ export function About() {
         {/* Experience, Skills, Achievements, and Education */}
         <div id="experiance" className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
           <div className="lg:col-span-7 bg-surface-container-low p-10 rounded-xl border border-outline-variant/30">
-            <h3 className="font-headline text-4xl font-bold tracking-tight mb-12">Work & Innovation</h3>
+            <h3 className="font-headline text-4xl font-bold tracking-tight mb-12">Experience</h3>
             <div className="space-y-16">
               {experiences.map((exp, index) => (
                 <motion.div
@@ -116,7 +118,10 @@ export function About() {
                       <h4 className="text-2xl font-bold">{exp.role}</h4>
                       <p className="text-primary font-medium">{exp.company}</p>
                     </div>
-                    <span className="text-xs uppercase tracking-wider text-on-surface-variant/60 bg-surface-container px-3 py-1 rounded-full">{exp.period}</span>
+                    <div className="flex flex-col items-start md:items-end gap-1">
+                      <span className="text-xs uppercase tracking-wider text-on-surface-variant/60 bg-surface-container px-3 py-1 rounded-full">{exp.period}</span>
+                      <span className="text-xs uppercase tracking-wider text-primary/70">Remote</span>
+                    </div>
                   </div>
                   <p className="text-on-surface-variant leading-relaxed max-w-2xl">{exp.description}</p>
                   <ul className="mt-4 space-y-2 text-on-surface-variant">
@@ -139,9 +144,17 @@ export function About() {
             transition={{ duration: 0.8 }}
             className="lg:col-span-5 bg-surface-container-low p-10 rounded-xl border border-outline-variant/30"
           >
-            <h4 className="font-bold text-lg leading-tight mb-4">Achievements</h4>
+            <h4 className="font-bold text-lg leading-tight mb-4">Featured Achievement</h4>
+            <div className="mb-5 rounded-lg border border-primary/40 bg-primary/10 p-4">
+              <p className="text-xs uppercase tracking-[0.16em] font-bold text-primary mb-2">S&P Global & CRISIL · 2026</p>
+              <p className="font-bold leading-relaxed">Top 7 finalist for RiskPulse AI</p>
+              <p className="mt-2 text-sm text-on-surface-variant leading-relaxed">
+                Built an NLP-powered financial risk intelligence and portfolio stress-testing platform.
+              </p>
+            </div>
+            <h5 className="font-bold text-sm leading-tight mb-3">More milestones</h5>
             <ul className="space-y-3 text-sm text-on-surface-variant">
-              {achievements.map((item) => (
+              {achievements.slice(1).map((item) => (
                 <li key={item} className="leading-relaxed flex items-start gap-2">
                   <span className="font-bold text-primary">•</span>
                   <span>{item}</span>

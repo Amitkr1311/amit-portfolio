@@ -14,6 +14,16 @@ export function Hero() {
       >
         Software Development Engineer
       </motion.span>
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+        className="inline-flex w-fit items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary"
+      >
+        <span className="h-2 w-2 rounded-full bg-primary" />
+        Top 7 Finalist · S&P Global & CRISIL Code to Connect Hackathon 2026
+      </motion.div>
       <motion.h1
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
